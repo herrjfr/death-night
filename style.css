@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+}
+.main{
+    width: 100%;
+    height: 400px;
+    background-image: url(./img/bg.jpe);
+    background-position: left;
+    background-size: cover;
+    position: relative;
+    border: solid 5px black;
+    .main-player{
+        background-image: url(./img/mainPlayer.png);
+        background-position: center;
+        background-size: cover;
+        position: absolute;
+        bottom: 60px;
+        left: 0;
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.bullet{
+    width: 10px;
+    height: 5px;
+    background-color: gold;
+    border-radius: 0 50% 50% 0;
+    position: absolute;
+}
