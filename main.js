@@ -37,14 +37,18 @@ main.addEventListener("click", () => {
     bullet.style.top = playerY + "px"
 
     let bulletAngle = angle
-
+    
     let shot = setInterval(() => {
+
+        
 
         bulletX += Math.cos(bulletAngle * Math.PI / 180) * speed
         bulletY += Math.sin(bulletAngle * Math.PI / 180) * speed
 
         bullet.style.left = bulletX + "px"
         bullet.style.top = bulletY + "px"
+
+        bullet.style.transform = `rotate(${bulletAngle}deg)`
 
         if(bulletY<=0 || bulletY>=380 || bulletX>=1500){
             bullet.remove()
