@@ -4,8 +4,8 @@ let mainPlayer = document.querySelector(".main-player")
 let mouseX;
 let mouseY;
 
-let playerX = 0
-let playerY = 270
+let playerX = 50
+let playerY = 272
 
 let minusX
 let minusY
@@ -31,19 +31,22 @@ main.addEventListener("click", () => {
     let bulletX = playerX
     let bulletY = playerY
 
-    let speed = 10
+    let speed = 20
 
     bullet.style.left = playerX + "px"
     bullet.style.top = playerY + "px"
 
+    let bulletAngle = angle
+
     let shot = setInterval(() => {
 
-        bulletX += Math.cos(angle * Math.PI / 180) * speed
-        bulletY += Math.sin(angle * Math.PI / 180) * speed
+        bulletX += Math.cos(bulletAngle * Math.PI / 180) * speed
+        bulletY += Math.sin(bulletAngle * Math.PI / 180) * speed
 
         bullet.style.left = bulletX + "px"
         bullet.style.top = bulletY + "px"
-        if(bulletY<=0 || bulletY>=380 || bulletX>=750){
+
+        if(bulletY<=0 || bulletY>=380 || bulletX>=1500){
             bullet.remove()
             clearInterval(shot)
         }

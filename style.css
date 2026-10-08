@@ -24,6 +24,7 @@ body{
         background-position: center;
         background-size: cover;
         position: absolute;
+        z-index: 1;
         bottom: 60px;
         left: 0;
         width: 100px;
@@ -34,7 +35,8 @@ body{
 .bullet{
     width: 10px;
     height: 5px;
-    background-color: gold;
+    background-color: red;
     border-radius: 0 50% 50% 0;
+    border: solid 1px white;
     position: absolute;
 }
