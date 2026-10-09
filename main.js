@@ -1,5 +1,6 @@
 let main = document.querySelector(".main")
 let mainPlayer = document.querySelector(".main-player")
+const shootSound = document.querySelector(".shot-sound")
 
 let mouseX;
 let mouseY;
@@ -12,9 +13,13 @@ let minusY
 
 let angle
 
+//!mouse kordinatini almaq
 main.addEventListener("mousemove", (event) => {
-    mouseX = event.offsetX
-    mouseY = event.offsetY
+    
+    let rect = main.getBoundingClientRect()
+
+    mouseX = event.clientX - rect.left
+    mouseY = event.clientY - rect.top
 
     minusX = mouseX - playerX
     minusY = mouseY - playerY
@@ -24,7 +29,12 @@ main.addEventListener("mousemove", (event) => {
     mainPlayer.style.transform = `rotate(${angle}deg)`
 })
 
+//!ates
 main.addEventListener("click", () => {
+
+    shootSound.currentTime = 0
+    shootSound.play()
+
     let bullet = document.createElement("div")
     bullet.classList.add("bullet")
 
@@ -40,8 +50,6 @@ main.addEventListener("click", () => {
     
     let shot = setInterval(() => {
 
-        
-
         bulletX += Math.cos(bulletAngle * Math.PI / 180) * speed
         bulletY += Math.sin(bulletAngle * Math.PI / 180) * speed
 
@@ -54,7 +62,60 @@ main.addEventListener("click", () => {
             bullet.remove()
             clearInterval(shot)
         }
+
+        //!gulle zombiye deyir
+        let zombies = document.querySelectorAll(".zombie")
+        zombies.forEach(zombie=>{
+            let zombieX = Number(zombie.dataset.x)
+            let zombieY = Number(zombie.dataset.y)
+            if(bulletX>=zombieX && bulletX<=zombieX+70&&
+                bulletY>=zombieY && bulletY<=zombieY+120){
+                    bullet.remove()
+                    clearInterval(shot)
+                    zombie.remove()
+                }
+        })
     }, 10)
 
     main.append(bullet)
 })
+
+//!random zombie yaratmaq
+function createZombie(){
+    let zombie = document.createElement("div")
+
+    zombie.classList.add("zombie1")
+    zombie.classList.add("zombie")
+    
+    main.append(zombie)
+    
+    let zombieX = 1400
+    let zombieY = Math.floor((Math.random()*80)+180)
+
+    zombie.dataset.x = zombieX
+    zombie.dataset.y = zombieY
+
+    zombie.style.left = zombieX + "px"
+    zombie.style.top = zombieY + "px"
+
+    let zombieMove = setInterval(()=>{
+        zombieX--
+
+        zombie.dataset.x = zombieX
+
+        zombie.style.left = zombieX + "px"
+
+        if(zombieX<=300){
+            zombie.remove()
+            clearInterval(zombieMove)
+            clearInterval(zombieWalk)
+        }
+    },30)
+    let zombieWalk = setInterval(()=>{
+        zombie.classList.toggle("zombie2")
+    },700)
+}
+
+setInterval(()=>{
+    createZombie()
+},2000)

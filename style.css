@@ -9,7 +9,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: gray;
+    background-color: #e16331;
 }
 .main{
     width: 100%;
@@ -31,12 +31,27 @@ body{
         height: 100px;
     }
 }
-
 .bullet{
     width: 10px;
     height: 5px;
     background-color: red;
     border-radius: 0 50% 50% 0;
     border: solid 1px white;
+    position: absolute;
+}
+.zombie1{
+    width: 70px;
+    height: 120px;
+    background-image: url(./img/zombie-1.png);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+}
+.zombie2{
+    width: 70px;
+    height: 120px;
+    background-image: url(./img/zombie-2.png);
+    background-position: center;
+    background-size: cover;
     position: absolute;
 }
